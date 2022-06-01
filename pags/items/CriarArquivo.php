@@ -1,5 +1,25 @@
+<?php 
+include("connect/conexao.php");
+
+$nomeUsuario = Url::getURL(2);
+
+$stmt = $pdo->prepare("SELECT * FROM controlelogin WHERE usuario=?");
+$stmt->execute([$nomeUsuario]);
+
+$linha = $stmt->fetch();
+
+if (!$linha) {
+    exit(header('Location:'.URL::getBase().'Pagina/Login'));
+}
+
+?>
+
 <div class="w3-container">
-  
+  <div class="w3-half w3-padding">
+    <p>Uso exclusivo de: <?=$nomeUsuario; ?></p>
+    <a class="w3-button w3-red" href="<?=URL::getBase();?>Pagina/Painel/<?=$nomeUsuario; ?>">VOLTAR</a>
+  </div>
+
   <div class="w3-half w3-padding">
     <input class="w3-input w3-border w3-round" id="contagem" name="contagem" type="text">
   </div>
@@ -10,7 +30,7 @@
 
 </div>
 
-<form class="w3-container w3-card-4 w3-padding-16" method="post" action="<?=URL::getBase();?>Pagina/Visualizar" >
+<form class="w3-container w3-card-4 w3-padding-16" method="post" action="<?=URL::getBase();?>Pagina/Gerar/<?=$nomeUsuario; ?>" >
   <div id="campoPaineis" class="w3-container w3-row" >
       <div id="panel" class="w3-panel w3-col s6">
           <h2 class="w3-text-blue">Preencher Formulario</h2>

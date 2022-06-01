@@ -32,7 +32,7 @@ require "classes/Url.php";
         $modulo = Url::getURL( 0 ); 
 
         if( $modulo == null )
-            $modulo = "pagina";
+            $modulo = "Pagina";
 
         if( file_exists( "pags/" . $modulo . ".php" ) )
             require "pags/" . $modulo . ".php";
