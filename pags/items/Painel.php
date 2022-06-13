@@ -55,6 +55,7 @@ $sql->execute([$nomeUsuario]);
       <th>Endereço</th>
       <th>Whatsapp</th>
       <th>Divida</th>
+      <th>Apagar</th>
 </tr>
 </thead>
 <tbody> 
@@ -66,6 +67,7 @@ while ($planilhas = $sql->fetch()) {
         <td><?=$planilhas["Endereco"]?></td>
         <td><?=$planilhas['Whatsapp']?></td>
         <td><?=$planilhas['Valor']?></td>
+        <td><a class="w3-button w3-text-red" href="<?=URL::getBase();?>Pagina/Apagar/<?=$nomeUsuario; ?>/Painel/<?=$planilhas['ID']?>" >x</a></td>
     </tr>   
 <?php
 }

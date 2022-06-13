@@ -59,8 +59,17 @@ $(document).ready(function(){
           contador = parseInt(contador);
       }
 
+      let criarPanel = '<div id="panel" class="w3-panel w3-col s6">'+
+                        '<h2 class="w3-text-blue">Editar Formulario</h2>'+
+                       '<p><label class="w3-text-blue"><b>Nome</b></label><input class="w3-input w3-border w3-round" name="dados[nomes][]" type="text" required></p>'+
+                       '<p><label class="w3-text-blue"><b>Endereço</b></label><input class="w3-input w3-border w3-round" name="dados[endereco][]" type="text"></p>'+ 
+                       '<p><label class="w3-text-blue"><b>Whatsapp</b></label><input id="phone" class="w3-input w3-border w3-round" name="dados[whatsapp][]" type="text"></p>'+
+                       '<p><label class="w3-text-blue"><b>Valor da Divida</b></label><input id="money" class="w3-input w3-border w3-round" name="dados[divida][]" type="text"></p>'+
+                       '</div>';       
+
       for (let index = 0; index < contador; index++) {
-          panel.clone().appendTo(campoPaines);
+          //panel.clone().appendTo(campoPaines);
+          $(criarPanel).appendTo(campoPaines);
       }
   });
 

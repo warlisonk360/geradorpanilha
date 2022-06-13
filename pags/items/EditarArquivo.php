@@ -40,8 +40,10 @@ $sql->execute([$nomeUsuario]);
    while ($planilhas = $sql->fetch()) {
   ?>
       <div id="panel" class="w3-panel w3-col s6">
-          <h2 class="w3-text-blue">Editar Formulario <a class="w3-button w3-text-red" href="<?=URL::getBase();?>Pagina/Apagar/<?=$nomeUsuario; ?>/<?=$planilhas['ID']?>" >x</a></h2>
+          <h2 class="w3-text-blue">Editar Formulario <a class="w3-button w3-text-red" href="<?=URL::getBase();?>Pagina/Apagar/<?=$nomeUsuario; ?>/Editar/<?=$planilhas['ID']?>" >x</a></h2>
           
+          <input id="ident" class="w3-input w3-border w3-round" name="dados[id][]" type="hidden" value="<?=$planilhas['ID']?>">
+
           <p>      
           <label class="w3-text-blue"><b>Nome</b></label>
           <input class="w3-input w3-border w3-round" name="dados[nomes][]" type="text" value="<?=$planilhas['Nome']?>"></p>
@@ -70,6 +72,7 @@ $(document).ready(function(){
   
   var campoPaines = $("#campoPaineis");
   var panel = $("#panel");
+  var panelDuplicado = $("#panelDuplicado");
 
   $(document).on("focus", "#money", function() { 
       $(this).mask('000.000.000.000.000,00', {reverse: true});
@@ -79,6 +82,8 @@ $(document).ready(function(){
       $(this).mask('(00) 0 0000-0000');  
   });   
 
+
+
   $("#AdicionarFormulario").click(function(e){
       e.preventDefault();
       let contador = $("#contagem").val();
@@ -87,8 +92,17 @@ $(document).ready(function(){
           contador = parseInt(contador);
       }
 
+      let criarPanel = '<div id="panelDuplicado" class="w3-panel w3-col s6">'+
+                        '<h2 class="w3-text-blue">Editar Formulario <a id="remover" class="w3-button w3-text-red">x</a></h2>'+
+                       '<p><label class="w3-text-blue"><b>Nome</b></label><input class="w3-input w3-border w3-round" name="dados[nomes][]" type="text" required></p>'+
+                       '<p><label class="w3-text-blue"><b>Endereço</b></label><input class="w3-input w3-border w3-round" name="dados[endereco][]" type="text"></p>'+ 
+                       '<p><label class="w3-text-blue"><b>Whatsapp</b></label><input id="phone" class="w3-input w3-border w3-round" name="dados[whatsapp][]" type="text"></p>'+
+                       '<p><label class="w3-text-blue"><b>Valor da Divida</b></label><input id="money" class="w3-input w3-border w3-round" name="dados[divida][]" type="text"></p>'+
+                       '</div>';                                                                    
+
       for (let index = 0; index < contador; index++) {
-          panel.clone().appendTo(campoPaines);
+          //panel.clone().appendTo(campoPaines);
+          $(criarPanel).appendTo(campoPaines);
       }
   });
 
